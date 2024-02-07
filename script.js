@@ -6,22 +6,33 @@ let results = document.querySelector('#results');
 
 btn.addEventListener('click', (event) => {
 
-	let choice = event.target;
+		let choice = event.target;
 
-	switch(choice.id) {
-		case 'rock':
-			event = 'rock';
-			break;
-		case 'paper':
-			event = 'paper';
-			break;
-		case 'scissors':
-			event = 'scissors';
-			break;
-	}
+		switch(choice.id) {
+			case 'rock':
+				event = 'rock';
+				break;
+			case 'paper':
+				event = 'paper';
+				break;
+			case 'scissors':
+				event = 'scissors';
+				break;
+		}
 
-	playRound(event, getComputerChoice());
+		if(computerScore < 5 && playerScore < 5){
+			playRound(event, getComputerChoice());
+		
+			results.innerText += `\nPlayer Score is ${playerScore} and Computer Score is ${computerScore}`;
+		}
+
+		if (playerScore === 5 && playerScore > computerScore) {
+			results.innerText += `\n You Win!!`;
+		} else if (computerScore === 5 && computerScore > playerScore){
+			results.innerText += `\n You Lose!!`;
+		}
 });
+
 
 function getComputerChoice() {
 	const choice = ["Rock", "Paper", "Scissors"];
